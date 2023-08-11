@@ -1,16 +1,24 @@
 //
 //
 //
-import { addDays, addHours, addMinutes, setHours, setMinutes } from "date-fns";
+import { addDays, setHours, setMinutes } from "date-fns";
 
 export const firstNameValidation = {
-    id: "firstName",
-    name: "firstName",
+    id: "first_name",
+    name: "first_name",
     label: "First Name:",
     validation: {
         required: {
             value: true,
             message: "Required",
+        },
+        pattern: {
+            value: /^([a-zA-Z0-9]+)$/,
+            message: "Invalid input",
+        },
+        minLength: {
+            value: 3,
+            message: "Must be 3 at least characters long",
         },
         maxLength: {
             value: 30,
@@ -20,13 +28,21 @@ export const firstNameValidation = {
 };
 
 export const lastNameValidation = {
-    id: "lastName",
-    name: "lastName",
+    id: "last_name",
+    name: "last_name",
     label: "Last Name:",
     validation: {
         required: {
             value: true,
             message: "Required",
+        },
+        pattern: {
+            value: /^([a-zA-Z0-9]+)$/,
+            message: "Invalid input",
+        },
+        minLength: {
+            value: 3,
+            message: "Must be 3 at least characters long",
         },
         maxLength: {
             value: 30,
@@ -52,8 +68,8 @@ export const emailValidation = {
 };
 
 export const contactValidation = {
-    id: "contact",
-    name: "contact",
+    id: "contact_no",
+    name: "contact_no",
     label: "Contact Number:",
     validation: {
         required: {

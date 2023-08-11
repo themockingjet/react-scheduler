@@ -2,7 +2,7 @@
 //
 //
 
-import { ModalComponent } from "../components/ModalComponent";
+import { ModalComponent } from "../components/PopUpModal";
 
 function LivePreview() {
     return <></>;

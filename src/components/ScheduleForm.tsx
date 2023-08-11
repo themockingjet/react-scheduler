@@ -14,7 +14,8 @@ import {
     dateValidation,
     timeValidation,
 } from "../utils/inputValidation";
-import { ModalComponent } from "./ModalComponent";
+import { PopUpModal } from "./PopUpModal";
+import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import "../assets/datepicker.css";
 
@@ -27,13 +28,28 @@ interface scheduleFormProps {
 const ScheduleForm = ({ className }: scheduleFormProps) => {
     const methods = useForm();
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-    const [success, setSuccess] = useState(false);
+    const [type, setType] = useState("");
+    const [message, setMessage] = useState("");
+    const [show, setShow] = useState(false);
 
     const onSubmit = methods.handleSubmit((data) => {
-        console.log(data);
-        methods.reset();
-        setSuccess(true);
+        setShow(true);
+        axios
+            .post("http://localhost:5000/api/reservations", data)
+            .then((response) => {
+                setType("Success");
+                setMessage(response.data);
+                methods.reset();
+            })
+            .catch((err: any) => {
+                setType("Error");
+                setMessage(err.data);
+            });
     });
+
+    const handleClose: any = (e: any) => {
+        setShow(false);
+    };
 
     useEffect(() => {}, [selectedDate]);
 
@@ -96,7 +112,7 @@ const ScheduleForm = ({ className }: scheduleFormProps) => {
                         </div>
                     </form>
                 </FormProvider>
-                {success && <ModalComponent type="Success" message="Reservation Booked" />}
+                <PopUpModal type={type} message={message} className={show ? "" : "hidden"} onClick={handleClose} />
             </div>
         </>
     );

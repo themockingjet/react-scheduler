@@ -11,7 +11,8 @@ interface FormInputProps {
     id: string;
     name: string;
     label: string;
-    validation: {
+    type?: string;
+    validation?: {
         required: {
             value: boolean;
             message: string;
@@ -45,7 +46,7 @@ const FormInput: FC<FormInputProps> = ({ id, name, label, validation, ...props }
                 <label htmlFor={name} className={cn(labelCss, props.labelClassName)}>
                     {label}
                 </label>
-                <input className={cn(inputCss, props.inputClassName)} {...register(name, validation)} />
+                <input className={cn(inputCss, props.inputClassName)} type={props.type} {...register(name, validation)} />
                 {isInvalid && (
                     <p className="text-sm text-red-500 bg-red-100 rounded-md font-bold text-center w-">
                         {inputErrors.error.message}

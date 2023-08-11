@@ -7,24 +7,21 @@ import cn from "classnames";
 
 //
 interface ModalProps {
-    type: "Success" | "Error";
+    type: string;
     message: string;
     className?: string;
+    onClick?: (e: any) => void;
 }
 
-function ModalComponent({ type, message }: ModalProps) {
+function PopUpModal({ type, message, className, onClick }: ModalProps) {
     //
-    const [show, setShow] = useState(true);
-    const handleClose: any = (e: any) => {
-        setShow(false);
-    };
 
     return (
         <>
             <div
                 className={cn(
                     "absolute inset-x-0 inset-y-0 w-full flex h-screen flex-col justify-center overflow-hidden bg-gray-900 bg-opacity-10 py-6 sm:py-12",
-                    { hidden: !show }
+                    className
                 )}
             >
                 <div className="bg-white px-6 pt-10 pb-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-lg sm:rounded-lg sm:px-10">
@@ -38,7 +35,7 @@ function ModalComponent({ type, message }: ModalProps) {
                             </div>
                             <div className="flex justify-center pt-4">
                                 <button
-                                    onClick={handleClose}
+                                    onClick={onClick}
                                     className="bg-blue-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-full"
                                 >
                                     Close
@@ -52,4 +49,4 @@ function ModalComponent({ type, message }: ModalProps) {
     );
 }
 
-export { ModalComponent };
+export { PopUpModal };
