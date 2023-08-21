@@ -1,11 +1,16 @@
 //
 //
 //
+
+import axios from "axios";
 import cn from "classnames";
+import Form from "./Form";
+import FormInput from "./FormInput";
+import FormInputDate from "./FormInputDate";
+import FormInputTime from "./FormInputTime";
+import { PopUpModal } from "./PopUpModal";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormInput } from "./FormInput";
-import { FormInputDate } from "./FormInputDate";
 import {
     firstNameValidation,
     lastNameValidation,
@@ -14,8 +19,6 @@ import {
     dateValidation,
     timeValidation,
 } from "../utils/inputValidation";
-import { PopUpModal } from "./PopUpModal";
-import axios from "axios";
 import "react-datepicker/dist/react-datepicker.css";
 import "../assets/datepicker.css";
 
@@ -28,6 +31,7 @@ interface scheduleFormProps {
 const ScheduleForm = ({ className }: scheduleFormProps) => {
     const methods = useForm();
     const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+    const [selectedTime, setSelectedTime] = useState<Date | null>(null);
     const [type, setType] = useState("");
     const [message, setMessage] = useState("");
     const [show, setShow] = useState(false);
@@ -57,48 +61,44 @@ const ScheduleForm = ({ className }: scheduleFormProps) => {
         <>
             <div className={cn(className)}>
                 <FormProvider {...methods}>
-                    <form
+                    <Form
                         className="items-center"
-                        noValidate
-                        autoComplete="off"
                         onSubmit={(e: any) => {
                             e.preventDefault();
                         }}
                     >
                         <div className="lg:flex lg:flex-row">
                             <FormInput
-                                divClassName="lg:text-base lg:1/2"
-                                labelClassName="lg:text-base lg:1/2"
-                                inputClassName="lg:text-base lg:1/2 border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
+                                inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75"
                                 {...firstNameValidation}
                             />
                             <FormInput
-                                divClassName="lg:text-base lg:1/2"
-                                labelClassName="lg:text-base lg:1/2"
-                                inputClassName="lg:text-base lg:1/2 border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
+                                inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75"
                                 {...lastNameValidation}
                             />
                         </div>
                         <FormInput
-                            inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
+                            inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75"
                             {...emailValidation}
                         />
                         <FormInput
-                            inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
+                            inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75"
                             {...contactValidation}
                         />
                         <div className="lg:flex lg:flex-row">
                             <FormInputDate
-                                inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
+                                inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75"
                                 {...dateValidation}
                                 onDateChange={(e: Date) => {
                                     setSelectedDate(e);
+                                    if (!e) setSelectedTime(null);
                                 }}
                             />
-                            <FormInputDate
+                            <FormInputTime
                                 inputClassName="border-blue-300 focus:border-blue-600 focus:border-4 focus:border-opacity-75 rounded-md"
                                 {...timeValidation}
                                 date={selectedDate}
+                                time={selectedTime}
                             />
                         </div>
 
@@ -110,7 +110,7 @@ const ScheduleForm = ({ className }: scheduleFormProps) => {
                                 Book Reservation
                             </button>
                         </div>
-                    </form>
+                    </Form>
                 </FormProvider>
                 <PopUpModal type={type} message={message} className={show ? "" : "hidden"} onClick={handleClose} />
             </div>

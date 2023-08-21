@@ -7,6 +7,7 @@ export const firstNameValidation = {
     id: "first_name",
     name: "first_name",
     label: "First Name:",
+    type: "text",
     validation: {
         required: {
             value: true,
@@ -31,6 +32,7 @@ export const lastNameValidation = {
     id: "last_name",
     name: "last_name",
     label: "Last Name:",
+    type: "text",
     validation: {
         required: {
             value: true,
@@ -55,6 +57,7 @@ export const emailValidation = {
     id: "email",
     name: "email",
     label: "Email Address:",
+    type: "email",
     validation: {
         required: {
             value: true,
@@ -71,6 +74,7 @@ export const contactValidation = {
     id: "contact_no",
     name: "contact_no",
     label: "Contact Number:",
+    type: "phone",
     validation: {
         required: {
             value: true,

@@ -23,20 +23,6 @@ function Header() {
                         #WebApp
                     </Link>
                 </div>
-                <nav className="flex hidden lg:block gap-3 text-white font-bold text-lg lg:text-xl">
-                    <Link
-                        to="/about"
-                        className="p-2 hover:bg-white hover:rounded-md hover:bg-opacity-50 hover:text-blue-700"
-                    >
-                        About
-                    </Link>
-                    <Link
-                        to="/schedule"
-                        className="p-2 hover:bg-white hover:rounded-md hover:bg-opacity-50 hover:text-blue-700"
-                    >
-                        Schedule
-                    </Link>
-                </nav>
                 <nav className="absolute right-2 lg:hidden">
                     <button onClick={handleDropDownLink}>
                         <svg

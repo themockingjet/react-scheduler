@@ -34,29 +34,6 @@ const DashboardSideNav = ({ className }: DashboardSideNavProps) => {
                                 Dashboard
                             </NavLink>
                         </li>
-                        <li className="flex flex-row items-center justify-start gap-2 px-10 py-2 ">
-                            <span>
-                                <FaCalendarAlt color="white" />
-                            </span>
-
-                            <NavLink
-                                to="reservations"
-                                className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-                            >
-                                Reservations
-                            </NavLink>
-                        </li>
-                        <li className="flex flex-row items-center justify-start gap-2 px-10 py-2 ">
-                            <span>
-                                <FaUserTie color="white" />
-                            </span>
-                            <NavLink
-                                to="employees"
-                                className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
-                            >
-                                Employees
-                            </NavLink>
-                        </li>
                     </div>
                 </nav>
             </div>

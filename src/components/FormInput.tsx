@@ -1,10 +1,12 @@
 //
 //
 //
-import { FC } from "react";
-import cn from "classnames";
+
+import { cn } from "../utils/utils";
+import Input from "./Input";
 import { useFormContext } from "react-hook-form";
 import { findInputError, isFormInvalid } from "../utils";
+import { useRef } from "react";
 
 interface FormInputProps {
     //
@@ -25,14 +27,11 @@ interface FormInputProps {
     divClassName?: string;
     labelClassName?: string;
     inputClassName?: string;
+    errorClassName?: string;
     onChange?: (e: any) => void;
 }
 
-const FormInput: FC<FormInputProps> = ({ id, name, label, validation, ...props }: FormInputProps) => {
-    const divCss = "flex flex-col w-full  px-3 py-2";
-    const labelCss = "w-full text-base";
-    const inputCss = "w-full px-3 py-2 shadow-sm border outline-none h-12 xl:h-10 2xl:h-14";
-
+const FormInput = ({ id, name, label, validation, ...props }: FormInputProps) => {
     const {
         register,
         formState: { errors },
@@ -42,13 +41,25 @@ const FormInput: FC<FormInputProps> = ({ id, name, label, validation, ...props }
 
     return (
         <>
-            <div className={cn(divCss, props.divClassName)}>
-                <label htmlFor={name} className={cn(labelCss, props.labelClassName)}>
+            <div className={cn("flex flex-col px-3 py-2 w-full", props.divClassName)}>
+                <label htmlFor={id} className={cn("w-full", props.labelClassName)}>
                     {label}
                 </label>
-                <input className={cn(inputCss, props.inputClassName)} type={props.type} {...register(name, validation)} />
+                <Input
+                    className={cn(
+                        "w-full px-3 py-2 shadow-sm border outline-none h-12 xl:h-10 2xl:h-14",
+                        props.inputClassName
+                    )}
+                    type={props.type}
+                    {...register(name, validation)}
+                />
                 {isInvalid && (
-                    <p className="text-sm text-red-500 bg-red-100 rounded-md font-bold text-center w-">
+                    <p
+                        className={cn(
+                            "text-sm text-red-500 bg-red-100 rounded-md font-bold text-center",
+                            props.errorClassName
+                        )}
+                    >
                         {inputErrors.error.message}
                     </p>
                 )}
@@ -57,4 +68,4 @@ const FormInput: FC<FormInputProps> = ({ id, name, label, validation, ...props }
     );
 };
 
-export { FormInput };
+export default FormInput;

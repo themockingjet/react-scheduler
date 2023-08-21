@@ -6,7 +6,7 @@
 //
 //
 
-import { FormInput } from "./FormInput";
+import FormInput from "./FormInput";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { usernameValidation, passwordValidation } from "../utils/auth";

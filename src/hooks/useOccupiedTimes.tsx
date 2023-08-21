@@ -33,7 +33,7 @@ export function useOccupiedTimes(date: any) {
     const filterPassedTime = (time: Date) => {
         const currentDate = new Date();
         const selectedDate = date;
-        selectedDate.setHours(time.getHours());
+        selectedDate.setHours(time.getHours() - 1);
 
         return currentDate.getTime() < selectedDate.getTime();
     };

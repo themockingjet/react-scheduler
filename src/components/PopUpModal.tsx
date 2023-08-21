@@ -2,7 +2,6 @@
 //
 //
 
-import { useState } from "react";
 import cn from "classnames";
 
 //
@@ -20,7 +19,7 @@ function PopUpModal({ type, message, className, onClick }: ModalProps) {
         <>
             <div
                 className={cn(
-                    "absolute inset-x-0 inset-y-0 w-full flex h-screen flex-col justify-center overflow-hidden bg-gray-900 bg-opacity-10 py-6 sm:py-12",
+                    "z-50 absolute inset-x-0 inset-y-0 w-full flex h-screen flex-col justify-center overflow-hidden bg-gray-900 bg-opacity-10 py-6 sm:py-12",
                     className
                 )}
             >
